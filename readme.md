@@ -1,0 +1,1 @@
+# Public RightCrowd Helm charts repo
