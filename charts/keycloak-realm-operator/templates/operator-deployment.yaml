@@ -27,6 +27,8 @@ spec:
             {{- toYaml $.Values.keycloak.password | nindent 12 }}
           - name: REDIS_CONNECTION_STRING
             value: redis://operator-redis-svc:6379
+          - name: DENO_CERT
+            value: /kube-root-ca.crt
         resources:
           requests:
             cpu: {{ .Values.resources.requests.cpu }}
@@ -34,3 +36,11 @@ spec:
           limits:
             cpu: {{ .Values.resources.limits.cpu }}
             memory: {{ .Values.resources.limits.memory }}
+        volumeMounts:
+        - name: kube-root-ca
+          mountPath: /kube-root-ca.crt
+          subPath: ca.crt
+      volumes:
+        - name: kube-root-ca
+          configMap:
+            name: kube-root-ca.crt

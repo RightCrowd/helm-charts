@@ -65,6 +65,8 @@ spec:
               properties:
                 latestOperatorStatusUpdate:
                   type: string
+        subresources:
+          status: {}
       additionalPrinterColumns:
         - name: RealmName
           type: string
@@ -72,8 +74,6 @@ spec:
           jsonPath: .spec.realmName
   # either Namespaced or Cluster
   scope: Cluster
-  subresources:
-    status: {}
   validation:
     openAPIV3Schema:
       properties:
