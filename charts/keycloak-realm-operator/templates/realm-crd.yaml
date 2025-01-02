@@ -65,8 +65,8 @@ spec:
               properties:
                 latestOperatorStatusUpdate:
                   type: string
-        subresources:
-          status: {}
+      subresources:
+        status: {}
       additionalPrinterColumns:
         - name: RealmName
           type: string
