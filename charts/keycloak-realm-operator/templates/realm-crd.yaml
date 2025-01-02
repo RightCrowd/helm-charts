@@ -74,19 +74,6 @@ spec:
           jsonPath: .spec.realmName
   # either Namespaced or Cluster
   scope: Cluster
-  validation:
-    openAPIV3Schema:
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-        metadata:
-          type: object
-        spec:
-          type: object
-        status:
-          type: object
   names:
     plural: managedkeycloakrealms
     singular: managedkeycloakrealm
