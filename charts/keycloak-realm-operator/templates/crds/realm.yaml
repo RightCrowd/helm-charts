@@ -23,8 +23,11 @@ spec:
                   type: boolean
                 claimRealm:
                   type: boolean
-                # Any value
+                # Any value, should match RealmRepresentation
                 representation:
+                  type: object
+                  properties: {}
+                  additionalProperties: true
               required:
                 - realmId
             status:
