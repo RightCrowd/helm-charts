@@ -21,50 +21,23 @@ spec:
                   type: string
                 pruneRealm:
                   type: boolean
-                clients:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                      name:
-                        type: string
-                      enabled:
-                        type: boolean
-                      type:
-                        type: string
-                        enum:
-                          - oidc
-                      clientAuthenticationEnabled:
-                        type: boolean
-                      secretTargets:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            namespace:
-                              type: string
-                            name:
-                              type: string
-                            clientIdPropertyName:
-                              type: string
-                            clientSecretPropertyName:
-                              type: string
-                          required:
-                            - namespace
-                            - name
-                    required:
-                      - id
-                      - name
-                      - type
+                claimRealm:
+                  type: boolean
+                # Any value
+                representation:
               required:
                 - realmId
             status:
               type: object
               properties:
-                latestOperatorStatusUpdate:
+                state:
                   type: string
+                  enum:
+                   - "not-synced"
+                   - "syncing"
+                   - "synced"
+                   - "failed"
+                  default: "not-synced"
       subresources:
         status: {}
       additionalPrinterColumns:
@@ -72,6 +45,10 @@ spec:
           type: string
           description: The name of the realm
           jsonPath: .spec.realmName
+        - name: State
+          type: string
+          description: The state of the CR
+          jsonPath: .status.state
   # either Namespaced or Cluster
   scope: Cluster
   names:
