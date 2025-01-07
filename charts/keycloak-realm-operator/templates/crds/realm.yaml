@@ -26,7 +26,6 @@ spec:
                 # Any value, should match RealmRepresentation
                 representation:
                   type: object
-                  properties: {}
                   additionalProperties: true
               required:
                 - realmId
