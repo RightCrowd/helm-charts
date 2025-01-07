@@ -18,6 +18,8 @@ spec:
       containers:
       - name: operator
         image: {{ .Values.operatorImage }}
+        ports:
+          - containerPort: 12345  # debugger
         env:
           - name: KEYCLOAK_URL
             value: {{ .Values.keycloak.url }}
