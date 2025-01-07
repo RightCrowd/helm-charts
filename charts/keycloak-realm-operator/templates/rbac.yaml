@@ -16,10 +16,16 @@ metadata:
   name: keycloak-realm-controller
 rules:
 - apiGroups: ["k8s.rightcrowd.com"]
-  resources: ["managedkeycloakrealms"]
+  resources: ["keycloakrealms"]
   verbs: ["*"]
 - apiGroups: ["k8s.rightcrowd.com"]
-  resources: ["managedkeycloakrealms/status"]
+  resources: ["keycloakrealms/status"]
+  verbs: ["*"]
+- apiGroups: ["k8s.rightcrowd.com"]
+  resources: ["keycloakclients"]
+  verbs: ["*"]
+- apiGroups: ["k8s.rightcrowd.com"]
+  resources: ["keycloakclients/status"]
   verbs: ["*"]
 - apiGroups: ["k8s.rightcrowd.com"]
   resources: ["keycloakclientcredentials"]

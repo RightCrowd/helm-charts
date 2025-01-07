@@ -1,7 +1,7 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: managedkeycloakrealms.k8s.rightcrowd.com
+  name: keycloakrealms.k8s.rightcrowd.com
 spec:
   group: k8s.rightcrowd.com
   versions:
@@ -54,11 +54,11 @@ spec:
   # either Namespaced or Cluster
   scope: Cluster
   names:
-    plural: managedkeycloakrealms
-    singular: managedkeycloakrealm
-    kind: ManagedKeycloakRealm
+    plural: keycloakrealms
+    singular: keycloakrealm
+    kind: KeycloakRealm
     shortNames:
-    - mkcr
+    - kcr
 status:
   acceptedNames:
     kind: ""

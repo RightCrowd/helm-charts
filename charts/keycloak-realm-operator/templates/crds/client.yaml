@@ -1,0 +1,103 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: keycloakclients.k8s.rightcrowd.com
+spec:
+  group: k8s.rightcrowd.com
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                realmId:
+                  type: string
+                clientId:
+                  type: string
+                name:
+                  type: string
+                secret:
+                  type: object
+                  properties:
+                    value:
+                      type: string
+                      description: Value of the secret
+                    valueFrom:
+                      type: object
+                      properties:
+                        secretKeyRef:
+                          type: object
+                          properties:
+                            namespace:
+                              type: string
+                            name:
+                              type: string
+                            key:
+                              type: string
+                          required:
+                            - namespace
+                            - name
+                            - key
+                      required:
+                        - secretKeyRef
+                  description: Secret configuration for the client
+                pruneClient:
+                  type: boolean
+                  default: false
+                  description: Whether or not to delete the client in Keycloak when the CR is deleted
+                claimClient:
+                  type: boolean
+                  default: false
+                  description: Whether or not to claim management of the client if it already exists in Keycloak when the CR is created
+                representation:
+                  type: object
+                  additionalProperties: true
+                  description: Client representation following the ClientRepresentation spec
+              required:
+                - realmId
+                - clientId
+            status:
+              type: object
+              properties:
+                state:
+                  type: string
+                  enum:
+                   - "not-synced"
+                   - "syncing"
+                   - "synced"
+                   - "failed"
+                  default: "not-synced"
+      subresources:
+        status: {}
+      additionalPrinterColumns:
+        - name: RealmId
+          type: string
+          description: The id of the realm
+          jsonPath: .spec.realmId
+        - name: ClientId
+          type: string
+          description: The id of the client
+          jsonPath: .spec.clientId
+        - name: State
+          type: string
+          description: The state of the CR
+          jsonPath: .status.state
+  # either Namespaced or Cluster
+  scope: Cluster
+  names:
+    plural: keycloakclients
+    singular: keycloakclient
+    kind: KeycloakClient
+    shortNames:
+    - kcc
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
