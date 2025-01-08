@@ -26,7 +26,24 @@ spec:
                 # Any value, should match RealmRepresentation
                 representation:
                   type: object
-                  additionalProperties: true
+                  x-kubernetes-preserve-unknown-fields: true
+                # Any value
+                realmImports:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      import:
+                        type: object
+                        x-kubernetes-preserve-unknown-fields: true
+                      ifResourceExists:
+                        type: string
+                        enum:
+                          - "OVERWRITE"
+                          - "SKIP"
+                    required:
+                      - import
+                      - ifResourceExists
               required:
                 - realmId
             status:

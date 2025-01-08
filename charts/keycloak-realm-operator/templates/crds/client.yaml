@@ -56,7 +56,7 @@ spec:
                   description: Whether or not to claim management of the client if it already exists in Keycloak when the CR is created
                 representation:
                   type: object
-                  additionalProperties: true
+                  x-kubernetes-preserve-unknown-fields: true
                   description: Client representation following the ClientRepresentation spec
               required:
                 - realmId
