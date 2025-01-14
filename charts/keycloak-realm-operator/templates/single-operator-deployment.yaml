@@ -1,3 +1,4 @@
+{{ if eq .Values.mode "single" }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,6 +24,8 @@ spec:
         env:
           - name: KEYCLOAK_URL
             value: {{ .Values.keycloak.url }}
+          - name: OPERATOR_NAMESPACE
+            value: {{ .Release.Namespace }}
           - name: KEYCLOAK_USERNAME
             {{- toYaml $.Values.keycloak.username | nindent 12 }}
           - name: KEYCLOAK_PASSWORD
@@ -46,3 +49,4 @@ spec:
         - name: kube-root-ca
           configMap:
             name: kube-root-ca.crt
+{{ end }}
