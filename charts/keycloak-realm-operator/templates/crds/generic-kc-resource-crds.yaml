@@ -28,6 +28,10 @@ spec:
                   type: boolean
                   default: false
                   description: Whether or not to claim management of the resource if it already exists in Keycloak when the CR is created
+                recreateOnClaim:
+                  type: boolean
+                  default: false
+                  description: If enabled, the Keycloak resource will be deleted and recreated instead of simply being claimed
                 representation:
                   type: object
                   x-kubernetes-preserve-unknown-fields: true
