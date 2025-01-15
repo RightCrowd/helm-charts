@@ -10,3 +10,10 @@ resources:
     cpu: 100m
     memory: 512Mi
 operatorImage: ghcr.io/rightcrowd/keycloak-realm-operator:0.0.16
+genericCrds:
+  - kind: KeycloakClientScope
+    plural: keycloakclientscopes
+    singular: keycloakclientscope
+    short: kccs
+    group: k8s.rightcrowd.com
+    version: v1alpha1

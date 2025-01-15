@@ -33,6 +33,14 @@ rules:
 - apiGroups: ["k8s.rightcrowd.com"]
   resources: ["keycloakclientcredentials/status"]
   verbs: ["*"]
+{{- range $i, $value := .Values.genericCrds }}
+- apiGroups: ["{{ $value.group }}"]
+  resources: ["{{ $value.plurar }}"]
+  verbs: ["*"]
+- apiGroups: ["{{ $value.group }}"]
+  resources: ["{{ $value.plurar }}/status"]
+  verbs: ["*"]
+{{- end }}
 - apiGroups: [""]
   resources: ["secrets"]
   verbs: ["*"]
