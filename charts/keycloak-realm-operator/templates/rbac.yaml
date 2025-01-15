@@ -35,10 +35,10 @@ rules:
   verbs: ["*"]
 {{- range $i, $value := .Values.genericCrds }}
 - apiGroups: ["{{ $value.group }}"]
-  resources: ["{{ $value.plurar }}"]
+  resources: ["{{ $value.plural }}"]
   verbs: ["*"]
 - apiGroups: ["{{ $value.group }}"]
-  resources: ["{{ $value.plurar }}/status"]
+  resources: ["{{ $value.plural }}/status"]
   verbs: ["*"]
 {{- end }}
 - apiGroups: [""]
