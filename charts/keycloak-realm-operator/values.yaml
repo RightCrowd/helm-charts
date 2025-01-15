@@ -17,3 +17,9 @@ genericCrds:
     short: kccs
     group: k8s.rightcrowd.com
     version: v1alpha1
+  - kind: KeycloakGroup
+    plural: keycloakgroups
+    singular: keycloakgroup
+    short: kcgp
+    group: k8s.rightcrowd.com
+    version: v1alpha1
