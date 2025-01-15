@@ -42,7 +42,7 @@ spec:
                   x-kubernetes-preserve-unknown-fields: true
                   description: Resource representation following the Keycloak spec
               required:
-                - email
+                - username
             status:
               type: object
               properties:
