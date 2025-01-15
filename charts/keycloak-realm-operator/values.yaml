@@ -9,7 +9,7 @@ resources:
   limits:
     cpu: 100m
     memory: 512Mi
-operatorImage: ghcr.io/rightcrowd/keycloak-realm-operator:0.0.16
+operatorImage: ghcr.io/rightcrowd/keycloak-realm-operator:0.0.17
 genericCrds:
   - kind: KeycloakClientScope
     plural: keycloakclientscopes
