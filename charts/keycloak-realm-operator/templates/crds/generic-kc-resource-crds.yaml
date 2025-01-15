@@ -24,7 +24,7 @@ spec:
                   type: boolean
                   default: false
                   description: Whether or not to delete the resource in Keycloak when the CR is deleted
-                claimClient:
+                claim:
                   type: boolean
                   default: false
                   description: Whether or not to claim management of the resource if it already exists in Keycloak when the CR is created
