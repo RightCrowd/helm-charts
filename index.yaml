@@ -3,6 +3,16 @@ entries:
   keycloak-realm-operator:
   - apiVersion: v2
     appVersion: 0.0.17
+    created: "2025-01-15T18:21:44.862167023Z"
+    description: A k8s operator to manage Keycloak realms, their config and clients
+    digest: 3bef29560f11a58af188e9b26fa76650d7156c5669429b311e621262d4da3b2a
+    name: keycloak-realm-operator
+    type: application
+    urls:
+    - keycloak-realm-operator-0.0.27.tgz
+    version: 0.0.27
+  - apiVersion: v2
+    appVersion: 0.0.17
     created: "2025-01-15T18:13:59.777428655Z"
     description: A k8s operator to manage Keycloak realms, their config and clients
     digest: 50031f546f45439dff72c744b8b74fe158ccf27c810fad8cb5ac08f4bc3cb276
@@ -171,4 +181,4 @@ entries:
     urls:
     - keycloak-realm-operator-0.0.10.tgz
     version: 0.0.10
-generated: "2025-01-15T18:13:59.777560897Z"
+generated: "2025-01-15T18:21:44.862296444Z"
