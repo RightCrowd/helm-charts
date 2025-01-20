@@ -15,7 +15,7 @@ spec:
             spec:
               type: object
               properties:
-                realmId:
+                realm:
                   type: string
                 clientId:
                   type: string
@@ -46,20 +46,36 @@ spec:
                       required:
                         - secretKeyRef
                   description: Secret configuration for the client
-                pruneClient:
+                prune:
                   type: boolean
                   default: false
                   description: Whether or not to delete the client in Keycloak when the CR is deleted
-                claimClient:
+                claim:
                   type: boolean
                   default: false
                   description: Whether or not to claim management of the client if it already exists in Keycloak when the CR is created
+                recreateOnClaim:
+                  type: boolean      
+                scopes:
+                  type: object
+                  properties:
+                    default:
+                      type: array
+                      items:
+                        type: string
+                    optional:
+                      type: array
+                      items:
+                        type: string
+                  items:
+                    type: string
+                  description: Scopes that are granted to the client
                 representation:
                   type: object
                   x-kubernetes-preserve-unknown-fields: true
                   description: Client representation following the ClientRepresentation spec
               required:
-                - realmId
+                - realm
                 - clientId
             status:
               type: object
@@ -75,10 +91,10 @@ spec:
       subresources:
         status: {}
       additionalPrinterColumns:
-        - name: RealmId
+        - name: Realm
           type: string
           description: The id of the realm
-          jsonPath: .spec.realmId
+          jsonPath: .spec.realm
         - name: ClientId
           type: string
           description: The id of the client
