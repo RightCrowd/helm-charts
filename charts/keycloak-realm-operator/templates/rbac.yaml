@@ -51,6 +51,9 @@ rules:
   resources: ["secrets"]
   verbs: ["*"]
 - apiGroups: [""]
+  resources: ["events"]
+  verbs: ["*"]
+- apiGroups: [""]
   resources: ["namespaces"]
   verbs: ["list", "get", "watch"]
 ---
