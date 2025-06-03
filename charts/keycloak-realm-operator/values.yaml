@@ -22,4 +22,4 @@ genericCrds:
     short: kcgp
     group: k8s.rightcrowd.com
     version: v1alpha1
-operatorImage: ghcr.io/rightcrowd/keycloak-realm-operator:0.0.21
+operatorImage: ghcr.io/rightcrowd/keycloak-realm-operator:0.0.22
