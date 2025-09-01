@@ -1,0 +1,107 @@
+{{ if eq .Values.mode "split" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak-realm-operator-scheduler
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scheduler
+  template:
+    metadata:
+      labels:
+        app: scheduler
+    spec:
+      serviceAccountName: managed-keycloak-realm-operator
+      automountServiceAccountToken: true
+      containers:
+      - name: scheduler
+        image: {{ .Values.operatorImage }}
+        env:
+          - name: KEYCLOAK_URL
+            value: {{ .Values.keycloak.url }}
+          - name: OPERATOR_NAMESPACE
+            value: {{ .Release.Namespace }}
+          - name: KEYCLOAK_USERNAME
+            {{- toYaml $.Values.keycloak.username | nindent 12 }}
+          - name: KEYCLOAK_PASSWORD
+            {{- toYaml $.Values.keycloak.password | nindent 12 }}
+          - name: REDIS_CONNECTION_STRING
+            value: redis://operator-redis-svc:6379
+          - name: DENO_CERT
+            value: /kube-root-ca.crt
+          - name: ENABLE_KUBERNETES_WATCHERS
+            value: true
+          - name: ENABLE_WORKERS
+            value: false
+        resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+        volumeMounts:
+        - name: kube-root-ca
+          mountPath: /kube-root-ca.crt
+          subPath: ca.crt
+      volumes:
+        - name: kube-root-ca
+          configMap:
+            name: kube-root-ca.crt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak-realm-operator-worker
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.workerInstances }}
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      serviceAccountName: managed-keycloak-realm-operator
+      automountServiceAccountToken: true
+      containers:
+      - name: worker
+        image: {{ .Values.operatorImage }}
+        env:
+          - name: KEYCLOAK_URL
+            value: {{ .Values.keycloak.url }}
+          - name: OPERATOR_NAMESPACE
+            value: {{ .Release.Namespace }}
+          - name: KEYCLOAK_USERNAME
+            {{- toYaml $.Values.keycloak.username | nindent 12 }}
+          - name: KEYCLOAK_PASSWORD
+            {{- toYaml $.Values.keycloak.password | nindent 12 }}
+          - name: REDIS_CONNECTION_STRING
+            value: redis://operator-redis-svc:6379
+          - name: DENO_CERT
+            value: /kube-root-ca.crt
+          - name: ENABLE_KUBERNETES_WATCHERS
+            value: false
+          - name: ENABLE_WORKERS
+            value: true
+        resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+        volumeMounts:
+        - name: kube-root-ca
+          mountPath: /kube-root-ca.crt
+          subPath: ca.crt
+      volumes:
+        - name: kube-root-ca
+          configMap:
+            name: kube-root-ca.crt
+{{ end }}

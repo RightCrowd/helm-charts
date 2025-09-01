@@ -2,6 +2,8 @@ keycloak:
   url:
   username: {}
   password: {}
+mode: split
+workerInstances: 1
 resources:
   requests:
     cpu: 50m
