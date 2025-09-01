@@ -31,13 +31,7 @@ spec:
             value: redis://operator-redis-svc:6379
           - name: DENO_CERT
             value: /kube-root-ca.crt
-        resources:
-          requests:
-            cpu: {{ .Values.resources.requests.cpu }}
-            memory: {{ .Values.resources.requests.memory }}
-          limits:
-            cpu: {{ .Values.resources.limits.cpu }}
-            memory: {{ .Values.resources.limits.memory }}
+        resources: {{- toYaml .Values.resources | nindent 10 }}
         volumeMounts:
         - name: kube-root-ca
           mountPath: /kube-root-ca.crt
