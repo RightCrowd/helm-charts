@@ -2,13 +2,14 @@ keycloak:
   url:
   username: {}
   password: {}
-resources:
-  requests:
-    cpu: 50m
-    memory: 256Mi
-  limits:
-    cpu: 100m
-    memory: 512Mi
+resources: {}
+# These resource values are just a suggestion, please adjust them to your needs
+#  requests:
+#    cpu: 50m
+#    memory: 256Mi
+#  limits:
+#    cpu: 100m
+#    memory: 512Mi
 genericCrds:
   - kind: KeycloakClientScope
     plural: keycloakclientscopes
