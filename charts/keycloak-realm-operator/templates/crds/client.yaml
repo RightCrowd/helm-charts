@@ -67,9 +67,11 @@ spec:
                       type: array
                       items:
                         type: string
+                  description: Scopes that are granted to the client
+                roles:
+                  type: array
                   items:
                     type: string
-                  description: Scopes that are granted to the client
                 representation:
                   type: object
                   x-kubernetes-preserve-unknown-fields: true
